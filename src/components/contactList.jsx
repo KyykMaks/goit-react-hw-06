@@ -3,11 +3,11 @@ import { Contact } from "./contact";
 import css from "./contactList.module.css";
 
 export default function ContactList() {
-  const contacts = useSelector(state => state.contact.contacts);
+  const contacts = useSelector(state => state.contacts.items);
   const filterContact = useSelector(state => state.filter.filter);
 
-  const visibleUsers = contacts.filter(contact => {
-    return contact.text.toLowerCase().includes(filterContact.toLowerCase());
+  const visibleUsers = contacts.filter(item => {
+    return filterContact && item.text.toLowerCase().includes(filterContact.toLowerCase());
   });
     return (
     <div>

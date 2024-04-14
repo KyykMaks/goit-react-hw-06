@@ -9,7 +9,6 @@ export const App = () => {
       <ContactForm/>
       <SearchBox/>
       <ContactList/>
-       
     </div>
   );
 };
