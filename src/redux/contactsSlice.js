@@ -1,26 +1,25 @@
-
 import { createSlice } from "@reduxjs/toolkit";
 import { persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
 
 const initialState = {
-  contacts: {
-    "id-1": { id: "id-1", name: "Rosie Simpson", number: "459-12-56" },
-    "id-2": { id: "id-2", name: "Hermione Kline", number: "443-89-12" },
-    "id-3": { id: "id-3", name: "Eden Clements", number: "645-17-79" },
-    "id-4": { id: "id-4", name: "Annie Copeland", number: "227-91-26" },
-  },
+  contacts: [
+    { id: 'id-1', text: 'Rosie Simpson', phone: '459-12-56' },
+    { id: 'id-2', text: 'Hermione Kline', phone: '443-89-12' },
+    { id: 'id-3', text: 'Eden Clements', phone: '645-17-79' },
+    { id: 'id-4', text: 'Annie Copeland', phone: '227-91-26' },
+  ]
 };
 const contactSlice = createSlice({
   name: "contact",
   initialState,
   reducers: {
     addContact(state, action) {
-      state.contacts.push(action.playload);
+      state.contacts.push(action.payload)
     },
     deleteContact(state, action) {
       state.contacts = state.contacts.filter(
-        (contacts) => contacts.id !== action.playload
+        (contacts) => contacts.id !== action.payload
       );
     },
   },
@@ -30,13 +29,14 @@ export const { addContact, deleteContact } = contactSlice.actions;
 const persistConfig = {
   key: "root",
   storage,
-  whitelist: ["value"],
+  whitelist: ["contact"],
 };
 
 export const contactReducer = persistReducer(
   persistConfig,
   contactSlice.reducer
 );
+
 
 // Слайс контактів
 // У файлі contactsSlice.js оголоси слайс контактів, використовуючи функцію createSlice().
